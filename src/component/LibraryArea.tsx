@@ -9,8 +9,8 @@ const LibraryArea: React.FC = () => {
         Author Object {id: 1, name: 'Author 1'},{id: 2, name: 'Author 2'}
         Book Object {id:1,name:'Book 1',price:100,author:1},{id:2,name:'Book 2',price:100,author:2}
     */
-    const authorList: IAuthor [] = [];
-    const bookList: IBook [] = []
+    const authorList: IAuthor [] = [{id: 1, name: 'Author 1'},{id: 2, name: 'Author 2'}];
+    const bookList: IBook [] = [{id:1,name:'Book 1',price:100,author:1},{id:2,name:'Book 2',price:100,author:2}]
     const [author, setAuthor] = useState(authorList);
     return (
         <Row className='library-area'>
