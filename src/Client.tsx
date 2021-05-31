@@ -1,5 +1,5 @@
 import React from 'react';
-import Library from "./component/Library";
+import Library from "./view/Library";
 
 const Client: React.FC = () => {
     return (
