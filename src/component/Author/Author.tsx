@@ -16,7 +16,7 @@ const Author: React.FC<AuthorProps> = (props) => {
         <li className="py-2">
             <Row className="authors py-0">
                 <Col xs={8}>
-                    <label>{index}. {author.name} {author.id} </label>
+                    <label>{index}. {author.name} </label>
                 </Col>
                 <Col xs={4} className="author-icons">
                     <i onClick={() => updateAuthor(author.id)}>

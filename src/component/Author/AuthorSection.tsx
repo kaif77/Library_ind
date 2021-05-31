@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
 import {IAuthor} from "../../types/LibraryTypes";
@@ -14,13 +14,6 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
     const [formVisibility, setFormVisibility] = useState(false);
     const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
 
-    useEffect(()=>{
-        if(!authorToUpdate){
-            return;
-        }
-        setFormVisibility(true);
-    },[authorToUpdate]);
-
     const handleOnAuthorFormClose = () => {
         setFormVisibility(false);
         setAuthorToUpdate(null);
@@ -31,9 +24,9 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
         setAuthorToUpdate(null);
     }
 
-    const handleOnAuthorToUpdateId = (authorToUpdate: number) =>{
-        const updatingAuthor = authors.find(({id}) => id===authorToUpdate);
-        if(!updatingAuthor){
+    const handleOnAuthorToUpdateId = (authorToUpdate: number) => {
+        const updatingAuthor = authors.find(({id}) => id === authorToUpdate);
+        if (!updatingAuthor) {
             return;
         }
         setAuthorToUpdate(updatingAuthor);
@@ -42,11 +35,11 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
     return (
         <React.Fragment>
             <AuthorTitle/>
-            <AuthorList     authors={authors}
-                            updateAuthor={handleOnAuthorToUpdateId}/>
+            <AuthorList authors={authors}
+                        updateAuthor={handleOnAuthorToUpdateId}/>
             <AddAuthor onFormAdd={handleOnAddClick}/>
-            {formVisibility && <CreateAuthor    onFormClose={handleOnAuthorFormClose}
-                                                authorToUpdate={authorToUpdate}
+            {formVisibility && <CreateAuthor onFormClose={handleOnAuthorFormClose}
+                                             authorToUpdate={authorToUpdate}
             />}
         </React.Fragment>
 

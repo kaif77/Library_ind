@@ -1,12 +1,11 @@
 @import "variables";
 
 .library-area {
-  min-height: 100vh;
 
-  .author-section {
+  .book-section {
     padding: 0 2em 0 3em;
 
-    .author-title {
+    .book-title {
       text-align: left;
       font-weight: 500;
       font-size: 2.5em;
@@ -14,16 +13,16 @@
       border-bottom: 2px solid black;
     }
 
-    .empty-list {
-      font-size: 1.2em;
-      font-style: italic;
-      padding-top: 5px;
-    }
-
-    .author-list {
+    .book-list {
       display: block;
 
-      ul {
+      .empty-list {
+        font-size: 1.2em;
+        font-style: italic;
+        padding-top: 5px;
+      }
+
+      .book-ul {
 
         li {
           list-style: none;
@@ -31,7 +30,7 @@
           word-break: break-all;
           margin: 0;
 
-          .author-icons {
+          .books-icons {
             padding-right: 25px;
             text-align: right;
             display: none;
@@ -45,7 +44,7 @@
           &:hover {
             background-color: $form-hover-color;
 
-            .author-icons {
+            .books-icons {
               display: inline-block;
             }
           }
@@ -53,7 +52,7 @@
       }
     }
 
-    .add-author {
+    .add-book {
       cursor: pointer;
 
       i {
@@ -68,7 +67,7 @@
       }
     }
 
-    .create-author {
+    .create-book {
 
       h4 {
         border-bottom: 2px solid $create-author;
@@ -106,21 +105,30 @@
         margin-right: 0;
         margin-left: 2rem;
       }
+      .select-invalid{
+        font-size: 0.8rem;
+        padding-top: 5px;
+        color: #dc3545;
+      }
     }
   }
 
   @media only screen and (max-width: $extra-small-device-size) {
     min-height: 50vh;
-    .author-section {
+    .book-section {
       font-size: 0.8em;
       padding: 0 1.5em 0 1em;
 
-      .author-title {
+      .book-title {
         font-size: 2em;
         font-weight: 600;
       }
 
-      .create-author {
+      .create-book {
+
+        .create-book-title {
+          font-size: 1em;
+        }
 
         .formInputs {
           margin-left: 1.5em;
@@ -129,9 +137,13 @@
         .form-label {
           font-size: 0.9em;
         }
+
+        .select-invalid{
+          font-size: 0.6rem;
+          padding: 0;
+          color: #dc3545;
+        }
       }
     }
   }
 }
-
-

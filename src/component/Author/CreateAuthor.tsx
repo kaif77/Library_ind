@@ -3,9 +3,6 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../types/LibraryTypes";
 
-
-
-
 type CreateAuthorProps = {
     onFormClose: () => void
     authorToUpdate: IAuthor | null
@@ -16,6 +13,7 @@ const CreateAuthor: React.FC<CreateAuthorProps> = (props) => {
     const [validated, setValidated] = useState(false);
     const [authorName, setAuthorName] = useState<string | null>(null);
     const Swal = require('sweetalert2')
+
     const handleOnAuthorNameChanged = (name: string) => {
         setAuthorName(name);
     }
@@ -35,7 +33,6 @@ const CreateAuthor: React.FC<CreateAuthorProps> = (props) => {
             event.stopPropagation();
         }
 
-
         Swal.fire({
             title: 'Success!',
             text: 'Do you want to continue',
@@ -53,7 +50,7 @@ const CreateAuthor: React.FC<CreateAuthorProps> = (props) => {
             <Col xs={12} md={11} lg={10}>
                 <Row>
                     <Col className="create-author-title" xs={9}>
-                        <h3>Create Author</h3>
+                        <h4>Create Author</h4>
                     </Col>
                     <Col className='text-right' xs={3}>
                         <i onClick={onFormClose}><XCircle/></i>
@@ -62,7 +59,7 @@ const CreateAuthor: React.FC<CreateAuthorProps> = (props) => {
 
                 <Row>
                     <Col className="my-3">
-                        <Form className='formInputs' noValidate validated={validated} onSubmit={handleOnSubmit}>
+                        <Form className='form-inputs' noValidate validated={validated} onSubmit={handleOnSubmit}>
                             <Form.Group controlId="authorName">
                                 <Form.Label>Name of Author</Form.Label>
                                 <Form.Control type="text" placeholder=""
