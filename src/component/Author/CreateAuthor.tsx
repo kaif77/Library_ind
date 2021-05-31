@@ -3,6 +3,9 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {XCircle} from "react-feather";
 import {IAuthor} from "../../types/LibraryTypes";
 
+
+
+
 type CreateAuthorProps = {
     onFormClose: () => void
     authorToUpdate: IAuthor | null
@@ -12,7 +15,7 @@ const CreateAuthor: React.FC<CreateAuthorProps> = (props) => {
     const {onFormClose,authorToUpdate} = props;
     const [validated, setValidated] = useState(false);
     const [authorName, setAuthorName] = useState<string | null>(null);
-
+    const Swal = require('sweetalert2')
     const handleOnAuthorNameChanged = (name: string) => {
         setAuthorName(name);
     }
@@ -32,6 +35,14 @@ const CreateAuthor: React.FC<CreateAuthorProps> = (props) => {
             event.stopPropagation();
         }
 
+
+        Swal.fire({
+            title: 'Success!',
+            text: 'Do you want to continue',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+        })
         setValidated(true);
         setAuthorName(null);
         onFormClose();
