@@ -1,0 +1,34 @@
+import React from "react";
+import {Col, Row} from "react-bootstrap";
+import {IAuthor} from "../../types/LibraryTypes";
+import {Trash2, Edit} from 'react-feather';
+
+type AuthorProps = {
+    author: IAuthor
+    index: number
+    updateAuthor: (id:number) => void
+}
+
+const Author: React.FC<AuthorProps> = (props) => {
+    const {author, index, updateAuthor } = props;
+
+    return (
+        <li className="py-2">
+            <Row className="authors py-0">
+                <Col xs={8}>
+                    <label>{index}. {author.name} {author.id} </label>
+                </Col>
+                <Col xs={4} className="author-icons">
+                    <i onClick={() => updateAuthor(author.id)}>
+                        <Edit className='text-warning'/>
+                    </i>
+                    <i>
+                        <Trash2 className='text-danger'/>
+                    </i>
+                </Col>
+            </Row>
+        </li>
+    )
+}
+
+export default Author;

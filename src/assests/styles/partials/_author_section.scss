@@ -1,0 +1,140 @@
+@import "variables";
+
+.library-area {
+  min-height: 100vh;
+
+  .author-title {
+    text-align: left;
+    font-weight: 500;
+    font-size: 2.5em;
+    padding: 15px 15px 15px 0;
+    border-bottom: 2px solid black;
+  }
+
+  .author-section {
+    padding: 0 2em 0 3em;
+
+    .empty-list {
+      font-size: 1.2em;
+      font-style: italic;
+      padding-top: 5px;
+    }
+
+    .author-list {
+      display: block;
+
+      ul {
+
+        li {
+          list-style: none;
+          font-size: 1.3em;
+          word-break: break-all;
+          margin: 0;
+
+          .author-icons {
+            padding-right: 25px;
+            text-align: right;
+            display: none;
+
+            i {
+              cursor: pointer;
+              margin-left: 15px;
+            }
+
+          }
+
+          &:hover {
+            background-color: $form-hover-color;
+
+            .author-icons {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+
+    .add-author {
+      cursor: pointer;
+      i {
+        color: $create-btn-color;
+        vertical-align: text-bottom;
+      }
+
+      label{
+        cursor: pointer;
+        font-size: 1.2em;
+        font-weight: 500;
+      }
+    }
+
+    .create-author {
+
+      h3 {
+        border-bottom: 2px solid $create-author;
+        color: $create-author;
+        display: inline-block;
+      }
+
+      i {
+        vertical-align: sub;
+        cursor: pointer;
+      }
+
+      .create-btn{
+        float: right;
+        background-color: $create-btn-color;
+      }
+
+      .form-label {
+        font-size: 0.7em;
+      }
+
+      .form-control {
+        border-radius: unset;
+        border: 2px solid $input-field-border-color;
+      }
+
+      .create-btn {
+        background-color: $create-btn-color;
+        border-radius: 8px;
+        float: right;
+        font-size: 1.1em;
+      }
+
+      .formInputs {
+        margin-right: 0;
+        margin-left: 2rem;
+      }
+
+      .formCloseButton {
+        text-align: right;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $extra-small-device-size) {
+
+    .author-section {
+      font-size: 0.8em;
+      padding: 0 1em 0 1em;
+
+      .author-title {
+        font-size: 2em;
+        font-weight: 600;
+      }
+
+      .create-author {
+        .formInputs {
+          margin-left: 0;
+        }
+
+        .form-label {
+          font-size: 0.9em;
+        }
+      }
+    }
+  }
+}
+
+
