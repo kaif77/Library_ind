@@ -6,42 +6,79 @@ import {IAuthor} from "../../types/LibraryTypes";
 type CreateAuthorProps = {
     onFormClose: () => void
     authorToUpdate: IAuthor | null
+    authors: IAuthor[]
+    onAuthorAdded: (author: IAuthor) => void
+    onAuthorUpdate: (author: IAuthor) => void
 }
 
 const CreateAuthor: React.FC<CreateAuthorProps> = (props) => {
-    const {onFormClose,authorToUpdate} = props;
+    const {onFormClose, authorToUpdate, authors, onAuthorAdded, onAuthorUpdate} = props;
     const [validated, setValidated] = useState(false);
     const [authorName, setAuthorName] = useState<string | null>(null);
-    const Swal = require('sweetalert2')
+    const Swal = require('sweetalert2');
 
     const handleOnAuthorNameChanged = (name: string) => {
         setAuthorName(name);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!authorToUpdate) {
             setAuthorName('');
             return;
         }
         setAuthorName(authorToUpdate.name);
-    },[authorToUpdate])
+    }, [authorToUpdate])
 
     const handleOnSubmit = (event: any) => {
         event.preventDefault();
         const form = event.currentTarget;
+
         if (form.checkValidity() === false) {
             event.stopPropagation();
         }
 
+        if (!authorName || authorName.trim() === '') {
+            return;
+        }
+
+        if (authorToUpdate) {
+            const updatedAuthor: IAuthor = {...authorToUpdate, name: authorName};
+            onAuthorUpdate(updatedAuthor);
+            setAuthorName(null);
+            updateAlert();
+            return;
+        }
+
+        let newID: number;
+        if (authors.length === 0) {
+            newID = 1;
+        } else {
+            newID = authors[authors.length - 1].id + 1;
+        }
+
+        const newAuthor: IAuthor = {id: newID, name: authorName};
+        onAuthorAdded(newAuthor);
+
         Swal.fire({
             title: 'Success!',
-            text: 'Do you want to continue',
             icon: 'success',
+            text: 'New Author Added',
             showConfirmButton: false,
             timer: 1500
-        })
+        });
         setValidated(true);
         setAuthorName(null);
+        onFormClose();
+    }
+
+    const updateAlert = () => {
+        Swal.fire({
+            title: 'Updated!',
+            icon: 'success',
+            text: 'Author Updated',
+            showConfirmButton: false,
+            timer: 1500
+        });
         onFormClose();
     }
 
