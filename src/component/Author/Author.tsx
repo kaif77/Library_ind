@@ -6,11 +6,12 @@ import {Trash2, Edit} from 'react-feather';
 type AuthorProps = {
     author: IAuthor
     index: number
-    updateAuthor: (id:number) => void
+    updateAuthor: (id: number) => void
+    deleteAuthor: (id: number) => void
 }
 
 const Author: React.FC<AuthorProps> = (props) => {
-    const {author, index, updateAuthor } = props;
+    const {author, index, updateAuthor, deleteAuthor} = props;
 
     return (
         <li className="py-2">
@@ -19,11 +20,11 @@ const Author: React.FC<AuthorProps> = (props) => {
                     <label>{index}. {author.name} </label>
                 </Col>
                 <Col xs={4} className="author-icons">
-                    <i onClick={() => updateAuthor(author.id)}>
-                        <Edit className='text-warning'/>
+                    <i>
+                        <Edit onClick={() => updateAuthor(author.id)} className='text-warning'/>
                     </i>
                     <i>
-                        <Trash2 className='text-danger'/>
+                        <Trash2 onClick={() => deleteAuthor(author.id)} className='text-danger'/>
                     </i>
                 </Col>
             </Row>
