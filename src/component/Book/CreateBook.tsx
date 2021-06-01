@@ -9,19 +9,22 @@ type CreateBookProps = {
     bookToUpdate: IBook | null
     authors: IAuthor[]
     onFormClose: () => void
+    onBookAdd: (book: IBook) => void
+    books: IBook[]
+    updateBook: (book: IBook) => void
 }
 
 const CreateBook: React.FC<CreateBookProps> = (props) => {
-    const {bookToUpdate, authors, onFormClose} = props;
+    const {bookToUpdate, authors, onFormClose, onBookAdd, books, updateBook} = props;
     const [validated, setValidated] = useState(false);
     const [bookName, setBookName] = useState<string | null>(null);
     const [price, setPrice] = useState<number | null>(null);
     const [bookAuthor, setBookAuthor] = useState<IOptions | null>(null);
+    const Swal = require('sweetalert2');
 
     const options: IOptions[] | null = authors.map((author) => {
         return {value: author.id, label: author.name};
     });
-
 
     const handleOnBookNameChanged = (name: string) => {
         setBookName(name);
@@ -63,6 +66,51 @@ const CreateBook: React.FC<CreateBookProps> = (props) => {
             event.stopPropagation();
         }
         setValidated(true);
+
+        if (!bookName || bookName.trim() === '' || !price || price < 0 || !bookAuthor) {
+            return;
+        }
+
+        if (bookToUpdate) {
+            const updatedBook: IBook = {...bookToUpdate, name: bookName, price: price, author: bookAuthor.value};
+            updateBook(updatedBook);
+            setBookName(null);
+            updateAlert();
+            return;
+        }
+
+        let newBookID: number;
+        if (books.length === 0) {
+            newBookID = 1;
+        } else {
+            newBookID = authors[books.length - 1].id + 1;
+        }
+
+        const newBook: IBook = {id: newBookID, name: bookName, price: price, author: bookAuthor.value};
+        onBookAdd(newBook);
+        Swal.fire({
+            title: 'Success!',
+            icon: 'success',
+            text: 'New Book Added',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        setValidated(false);
+        setBookName(null);
+        setPrice(null);
+        setBookAuthor(null);
+        onFormClose();
+    }
+
+    const updateAlert = () => {
+        Swal.fire({
+            title: 'Updated!',
+            icon: 'success',
+            text: 'Book Updated',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        onFormClose();
     }
 
     return (
@@ -140,7 +188,7 @@ const CreateBook: React.FC<CreateBookProps> = (props) => {
 
                                 />
                             </Form.Group>
-                            {(!bookAuthor && validated === true) &&
+                            {(!bookAuthor && validated) &&
                             <span className='select-invalid'>
                                 Please select an Author.
                             </span>}

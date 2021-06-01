@@ -1,19 +1,29 @@
 import React from "react";
 import Author from "./Author";
-import {IAuthor} from "../../types/LibraryTypes";
+import {IAuthor, IBook} from "../../types/LibraryTypes";
 import {Col, Row} from "react-bootstrap";
 
 type AuthorListProps = {
     authors: IAuthor[]
     updateAuthor: (id: number) => void
     deleteAuthor: (id: number) => void
+    books: IBook[]
 }
 
 const AuthorList: React.FC<AuthorListProps> = (props) => {
-    const {authors, updateAuthor, deleteAuthor} = props;
+    const {authors, updateAuthor, deleteAuthor, books} = props;
     const Swal = require('sweetalert2');
 
     const handleDeleteConfirm = (authorId: number) => {
+        const inBook = books.find(({author}) => author === authorId);
+        if (inBook) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Can not delete Author',
+                text: 'Author is been assigned to a Book!',
+            });
+            return;
+        }
         deleteAlert(authorId);
     }
 
