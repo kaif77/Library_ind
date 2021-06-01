@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from "react";
 import AuthorTitle from "./AuthorTitle";
 import AuthorList from "./AuthorList";
-import {IAuthor} from "../../types/LibraryTypes";
+import {IAuthor, IBook} from "../../types/LibraryTypes";
 import CreateAuthor from "./CreateAuthor";
 import AddAuthor from "./AddAuthor";
 
 type AuthorSectionProps = {
     authors: IAuthor[]
     setAuthors: (authors: IAuthor[]) => void
+    books: IBook[]
 }
 
 const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
-    const {authors, setAuthors} = props;
+    const {authors, setAuthors, books} = props;
     const [formVisibility, setFormVisibility] = useState(false);
     const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
 
@@ -67,7 +68,9 @@ const AuthorSection: React.FC<AuthorSectionProps> = (props) => {
             <AuthorTitle/>
             <AuthorList authors={authors}
                         updateAuthor={handleOnAuthorToUpdateId}
-                        deleteAuthor={handleOnAuthorDelete}/>
+                        deleteAuthor={handleOnAuthorDelete}
+                        books={books}
+            />
             <AddAuthor onFormAdd={handleOnAddClick}/>
             {formVisibility && <CreateAuthor onFormClose={handleOnAuthorFormClose}
                                              authorToUpdate={authorToUpdate}

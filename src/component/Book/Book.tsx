@@ -7,10 +7,11 @@ type BookProps ={
     books:IBook
     index:number
     updateBook: (id:number) => void
+    deleteBook: (id: number) => void
 }
 
 const Book: React.FC<BookProps> = (props) => {
-    const {books,index,updateBook} = props;
+    const {books,index,updateBook,deleteBook} = props;
 
     return (
         <li className="py-2">
@@ -19,11 +20,11 @@ const Book: React.FC<BookProps> = (props) => {
                     <label>{index}. {books.name}</label>
                 </Col>
                 <Col xs={4} className="books-icons">
-                    <i onClick={()=> updateBook(books.id)}>
-                        <Edit className='text-warning'/>
+                    <i>
+                        <Edit onClick={()=> updateBook(books.id)} className='text-warning'/>
                     </i>
                     <i>
-                        <Trash2 className='text-danger'/>
+                        <Trash2 onClick={()=> deleteBook(books.id)} className='text-danger'/>
                     </i>
                 </Col>
             </Row>

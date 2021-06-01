@@ -12,17 +12,20 @@ const LibraryArea: React.FC = () => {
     const authorList: IAuthor [] = [];
     const bookList: IBook [] = [];
     const [author, setAuthor] = useState(authorList);
+    const [book, setBook] = useState(bookList)
 
     return (
         <Row className='library-area'>
             <Col xs={{span: 12, order: 2}} md={{span: 6, order: 1}} className="book-section">
-                <BookSection books={bookList}
+                <BookSection books={book}
                              authors={author}
+                             setBook={setBook}
                 />
             </Col>
             <Col xs={{span: 12, order: 1}} md={{span: 6, order: 1}} className="author-section">
                 <AuthorSection authors={author}
                                setAuthors={setAuthor}
+                               books={book}
                 />
             </Col>
         </Row>
